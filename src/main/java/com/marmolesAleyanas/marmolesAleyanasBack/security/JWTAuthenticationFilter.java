@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.marmolesAleyanas.marmolesAleyanasBack.services.UserService;
+import com.marmolesAleyanas.marmolesAleyanasBack.services.AuthService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,7 +23,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private JWTGenerator jwtGenerator;
     
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -34,7 +34,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
        if(StringUtils.hasText(token) && jwtGenerator.validateToken(token)){
         String username = jwtGenerator.getSubjectFromToken(token);
 
-        UserDetails userDetails = userService.loadUserByUsername(username);
+        UserDetails userDetails = authService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
             userDetails.getUsername(), 
             null, 

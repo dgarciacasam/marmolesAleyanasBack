@@ -19,14 +19,14 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.marmolesAleyanas.marmolesAleyanasBack.services.UserService;
+import com.marmolesAleyanas.marmolesAleyanasBack.services.AuthService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
