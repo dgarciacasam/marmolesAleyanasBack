@@ -14,6 +14,6 @@ public class ProjectService {
     ProjectRepository projectRepository;
 
     public List<ProjectModel> getAll(){
-        return projectRepository.findAll();    
+        return projectRepository.findAllByOrderByDateAsc();    
     }
 }
