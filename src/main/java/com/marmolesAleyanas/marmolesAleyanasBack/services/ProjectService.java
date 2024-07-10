@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marmolesAleyanas.marmolesAleyanasBack.exceptions.ResourceNotFoundException;
+import com.marmolesAleyanas.marmolesAleyanasBack.models.ProjectDTO;
 import com.marmolesAleyanas.marmolesAleyanasBack.models.ProjectModel;
 import com.marmolesAleyanas.marmolesAleyanasBack.repository.ProjectRepository;
 
@@ -15,9 +17,38 @@ public class ProjectService {
     ProjectRepository projectRepository;
 
     public List<ProjectModel> getAll(){
-        return projectRepository.findAllByOrderByDateAsc();    
+        List<ProjectModel> projects = projectRepository.findAllByOrderByDateAsc();    
+        return projects;
     }
 
+    public ProjectModel createProject(ProjectDTO project){
+        ProjectModel newProject = new ProjectModel();
+        newProject.setDninif(project.getDninif());
+        newProject.setName(project.getName());
+        newProject.setAddress(project.getAddress());
+        newProject.setEmail(project.getEmail());
+        newProject.setFinishDate(project.getFinishDate());
+        newProject.setPhone(project.getPhone());
+        newProject.setAltphone(project.getAltphone());
+
+        ProjectModel createdProject = projectRepository.save(newProject); 
+        return createdProject;
+    }
+
+    public ProjectModel updateProject(ProjectDTO project, Integer id){
+        ProjectModel bdProject = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El proyecto no se ha encontrado"));
+        bdProject.setName(project.getName());
+        bdProject.setAddress(project.getAddress());
+        bdProject.setDninif(project.getDninif());
+        bdProject.setEmail(project.getEmail());
+        bdProject.setFinishDate(project.getFinishDate());
+        bdProject.setPhone(project.getPhone());
+        bdProject.setAltphone(project.getAltphone());
+
+        projectRepository.save(bdProject);
+        return bdProject;
+    }
+    
     public boolean deleteById(Integer id) {
         try {
             Optional<ProjectModel> entity = projectRepository.findById(id);
@@ -25,10 +56,11 @@ public class ProjectService {
                 projectRepository.deleteById(id);
                 return true;
             } else {
-                return false; // No se encontró la entidad
+                return false;
             }
         } catch (Exception e) {
-            return false; // Ocurrió un error al intentar eliminar la entidad
+            System.out.println(e.getMessage());
+            return false; 
         }
     }
 
