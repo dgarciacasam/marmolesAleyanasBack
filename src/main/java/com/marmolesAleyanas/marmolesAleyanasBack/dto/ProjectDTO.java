@@ -1,4 +1,4 @@
-package com.marmolesAleyanas.marmolesAleyanasBack.models;
+package com.marmolesAleyanas.marmolesAleyanasBack.dto;
 
 import java.time.LocalDate;
 

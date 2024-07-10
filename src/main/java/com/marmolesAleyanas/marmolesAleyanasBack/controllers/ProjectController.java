@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marmolesAleyanas.marmolesAleyanasBack.models.ProjectDTO;
+import com.marmolesAleyanas.marmolesAleyanasBack.dto.ProjectDTO;
 import com.marmolesAleyanas.marmolesAleyanasBack.models.ProjectModel;
 import com.marmolesAleyanas.marmolesAleyanasBack.services.ProjectService;
 
