@@ -24,7 +24,7 @@ public class ProjectDTO {
     @Pattern(regexp = "^\\d{9}$", message = "El teléfono debe constar de 9 dígitos")
     private String phone;
 
-    @Pattern(regexp = "^\\d{9}$",message = "El teléfono debe constar de 9 dígitos")
+    @Pattern(regexp = "^\\d{9}$",message = "El teléfono alternativo debe constar de 9 dígitos")
     private String altphone;
 
     @FutureOrPresent(message = "La fecha de finalización no puede ser anterior a la fecha actual")
