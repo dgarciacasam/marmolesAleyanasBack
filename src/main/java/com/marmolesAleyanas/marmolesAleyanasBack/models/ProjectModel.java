@@ -46,7 +46,6 @@ public class ProjectModel {
     @Column(name = "date")
     private LocalDate date = LocalDate.now();
 
-    @FutureOrPresent(message = "La fecha de finalización no puede ser anterior a la fecha actual")
     @Column(name = "finishDate")
     private LocalDate finishDate;
 
