@@ -3,7 +3,6 @@ package com.marmolesAleyanas.marmolesAleyanasBack.dto;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
