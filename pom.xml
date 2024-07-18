@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.marmolesAleyanas</groupId>
-	<artifactId>marmolesAleyanasBack</artifactId>
+	<artifactId>marmoles-aleyanas-back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>marmolesAleyanasBack</name>
 	<description>Backend de la aplicación de gestión para la empresa Marmoles Aleyanas</description>
