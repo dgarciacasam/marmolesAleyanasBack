@@ -1,20 +1,14 @@
-# Usamos una imagen base 
-FROM maven AS build
-
-# Establecemos el directorio de trabajo
-WORKDIR /app
-
-# Copiamos los archivos del proyecto al directorio de trabajo
+FROM eclipse-temurin:22-jdk AS build
 COPY . /app
+WORKDIR /app
+RUN ./mvnw package -DskipTests
+RUN mv -f target/*.jar app.jar
 
-# Ejecutamos maven para construir el proyecto
-RUN maven clean install
+FROM eclipse-temurin:22-jre
+ARG PORT
+ENV PORT=${PORT}
 
-# Creamos una nueva imagen basadaa en openJDK
-FROM openjdk:17
-
-EXPOSE 8080
-
-COPY --from=build /app/target/marmoles-aleyanas-back-0.0.1-SNAPSHOT.jar /app/marmoles-aleyanas-back-0.0.1-SNAPSHOT.jar
-
-ENTRYPOINT ["java", "-jar", "/app/marmoles-aleyanas-back-0.0.1-SNAPSHOT.jar"]
+COPY --from=build /app/app.jar .
+RUN useradd runtime
+USER runtime
+ENTRYPOINT [ "java", "-Dserver.port=${PORT}", "-jar", "app.jar" ]
